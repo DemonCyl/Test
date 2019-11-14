@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="Big5">
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/model/service/ANOBatchPassService.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/sfis/SFISTSP.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/barcode/Barcode_1616_table_PEGA.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/barcode/Barcode_1701_table_PEGA.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/barcode/Barcode_1709_AllPrint.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/barcode/LF_1709_linshi_maxprint.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/pack/CognexView.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/pack/ErrorView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/pack/HitPlate1721.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/pack/PickView.java" charset="Big5" />
+    <file url="file://$PROJECT_DIR$/src/mes_sfis/client/ui/pack/ShipMentUI.java" charset="Big5" />
+    <file url="PROJECT" charset="Big5" />
+  </component>
+</project>

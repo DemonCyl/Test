@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project name="unihan" default="buildAll" basedir=".">
+	<property name="src.dir" value="${basedir}\src"/>
+	<property name="lib.dir" value="${basedir}\lib"/>
+	<property name="des.dir" value="${basedir}\classes"/>
+	<!--property name="conf.src.dir" value="${basedir}/3_conf"/-->
+	<!--property name="web1.dir" value="C:\Program Files\Apache Software Foundation\Tomcat 6.0\webapps\PEGAMES" /-->
+	<property name="web2.dir" value="C:\Program Files\Apache Software Foundation\Tomcat 7.0\webapps\PEGAMES" />
+	<!--property name="web3.dir" value="C:\Program Files\Apache Software Foundation\Tomcat 6.0\webapps\axis2\WEB-INF\lib" /-->
+	<!--property name="web4.dir" value="C:\Program Files\Apache Software Foundation\Tomcat 7.0\webapps\axis2\WEB-INF\lib" /-->
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<target name="compileAP" description=""> 
+		<javac srcdir="${src.dir}" destdir="${des.dir}" classpathref="classpath" source="1.7" target="1.7">
+		<!--compilerarg value="-Xlint:unchecked"/-->
+		</javac>
+	</target>
+	<target name="archiveAP" depends="compileAP" description="">
+		<!--<native2ascii src="${conf.src.dir}\i18n" dest="${des.dir}/conf/i18n" ext=".properties" />-->
+		<jar destfile="${basedir}/5_MES_SFIS_Client.jar">
+			<fileset dir="${des.dir}" includes="mes_sfis/client/**"/>
+			<fileset dir="${des.dir}" includes="conf/i18n/*.properties" />
+			<fileset dir="${src.dir}" includes="*.properties" />
+			<fileset dir="${src.dir}" includes="*.xml" />
+			<manifest>
+    			<attribute name="Built-By" value="ASUS William"/>
+      		</manifest>
+		</jar>
+	</target>
+	<target name="archiveServer" depends="archiveAP" description="">
+		<jar destfile="${basedir}/5_MES_SFIS_Server.jar">
+			<fileset dir="${des.dir}" includes="mes_sfis/server/**"/>
+			<manifest>
+    			<attribute name="Built-By" value="ASUS William"/>
+      		</manifest>
+		</jar>
+	</target>
+	<target name="clean">
+		<mkdir dir="${des.dir}"/>
+		<delete file="${basedir}/5_MES_SFIS_Client.jar"/>
+		<delete file="${basedir}/5_MES_SFIS_Server.jar"/>
+		<delete>
+			<fileset dir="${des.dir}" includes="**/*.*" />
+		</delete>
+	</target>
+	<target name="signJar">
+		<signjar keystore=".keystore" storepass="123456" keypass="123456" jar="${basedir}/5_MES_SFIS_Client.jar" alias="AsusBase"/>
+		<signjar keystore=".keystore" storepass="123456" keypass="123456" jar="${basedir}/lib/xmlbeans-2.6.0.jar" alias="AsusBase"/>
+		<signjar keystore=".keystore" storepass="123456" keypass="123456" jar="${basedir}/lib/poi-3.14-20160307.jar" alias="AsusBase"/>
+		<signjar keystore=".keystore" storepass="123456" keypass="123456" jar="${basedir}/lib/poi-ooxml-3.14-20160307.jar" alias="AsusBase"/>
+		<signjar keystore=".keystore" storepass="123456" keypass="123456" jar="${basedir}/lib/poi-ooxml-schemas-3.14-20160307.jar" alias="AsusBase"/>
+
+		<copy file="${basedir}/5_MES_SFIS_Client.jar" todir="${web2.dir}" />
+		<copy file="${basedir}/5_MES_SFIS_Server.jar" todir="${web2.dir}\WEB-INF\lib" />
+
+		<!--copy file="${basedir}/5_MES_SFIS_Client.jar" todir="${web4.dir}" /-->
+		<!--copy file="${basedir}/5_MES_SFIS_Server.jar" todir="${web4.dir}" /-->
+
+	</target>
+	<target name="buildAll" depends="clean,archiveAP,archiveServer,signJar"/>
+</project>
